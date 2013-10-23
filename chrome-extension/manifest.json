@@ -20,9 +20,14 @@
   ],
   "minimum_chrome_version" : "6.0.0.0",
   "icons" : {
-    "16" : "imageinfo-16.png",
-    "48" : "imageinfo-48.png",
-    "128" : "imageinfo-128.png"
+    "16" : "email-16.png",
+    "19" : "email-19.png",
+    "24" : "email-24.png",
+    "32" : "email-32.png",
+    "48" : "email-48.png",
+    "64" : "email-64.png",
+    "96" : "email-96.png",
+    "128": "email-128.png"
   },
   "manifest_version": 2
 }
