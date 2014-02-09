@@ -2,7 +2,7 @@ import json
 import random
 import string
 
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify
 from flask.ext.pymongo import PyMongo
 from pymongo.errors import DuplicateKeyError
 app = Flask(__name__)
@@ -11,7 +11,7 @@ mongo = PyMongo(app)
 
 @app.route('/')
 def hello_world():
-    return render_template('kasm.html')
+    return "API is a go"
 
 
 @app.route('/alias/create', methods=['POST'])
