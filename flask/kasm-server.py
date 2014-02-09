@@ -1,7 +1,8 @@
 import json
 import random
+import string
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask.ext.pymongo import PyMongo
 from pymongo.errors import DuplicateKeyError
 app = Flask(__name__)
@@ -10,15 +11,16 @@ mongo = PyMongo(app)
 
 @app.route('/')
 def hello_world():
-    return 'Hello World!'
+    return render_template('kasm.html')
 
 
 @app.route('/create', methods=['POST'])
 def create():
     def id_generator(size, chars=string.ascii_lowercase + string.digits):
         return ''.join(random.choice(chars) for _ in xrange(size))
-    post_data = json.loads(request.data)
-    email = post_data['email']
+    #post_data = json.loads(request.data)
+    #email = post_data['email']
+    email = request.form['email']
     inserted = False
     while not inserted:
         try:
@@ -39,4 +41,4 @@ def create():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host="0.0.0.0", debug=True)

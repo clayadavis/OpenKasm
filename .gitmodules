@@ -1,0 +1,3 @@
+[submodule "flask/Flat-UI"]
+	path = flask/Flat-UI
+	url = git@github.com:designmodo/Flat-UI.git
