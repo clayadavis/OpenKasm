@@ -14,8 +14,8 @@ def hello_world():
     return render_template('kasm.html')
 
 
-@app.route('/create', methods=['POST'])
-def create():
+@app.route('/alias/create', methods=['POST'])
+def create_alias():
     def id_generator(size, chars=string.ascii_lowercase + string.digits):
         return ''.join(random.choice(chars) for _ in xrange(size))
     #post_data = json.loads(request.data)
@@ -37,6 +37,17 @@ def create():
                  'response': 'success',
                  'username': alias,
                  }
+    return jsonify(to_return)
+
+
+@app.route('alias/deactivate', methods=['POST'])
+def deactivate_alias():
+    post_data = json.loads(request.data)
+    alias = post_data['alias']
+    result = mongo.db.redirects.update({'alias': alias},
+                                       {'$set': {'deactivated': True}})
+    to_return = {'alias': alias}
+    to_return['response'] = 'success' if result['n'] > 0 else 'fail'
     return jsonify(to_return)
 
 
