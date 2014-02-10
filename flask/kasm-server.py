@@ -5,6 +5,9 @@ import string
 from flask import Flask, request, jsonify
 from flask.ext.pymongo import PyMongo
 from pymongo.errors import DuplicateKeyError
+
+from crossdomain import crossdomain
+
 app = Flask(__name__)
 app.config['MONGO_DBNAME'] = 'kasm'
 mongo = PyMongo(app)
@@ -15,6 +18,7 @@ def hello_world():
 
 
 @app.route('/alias/create', methods=['POST'])
+@crossdomain(origin='http://openkasm.com:8000')
 def create_alias():
     def id_generator(size, chars=string.ascii_lowercase + string.digits):
         return ''.join(random.choice(chars) for _ in xrange(size))
@@ -40,7 +44,8 @@ def create_alias():
     return jsonify(to_return)
 
 
-@app.route('alias/deactivate', methods=['POST'])
+@app.route('/alias/deactivate', methods=['POST'])
+@crossdomain(origin=['localhost', 'localhost:8000'])
 def deactivate_alias():
     post_data = json.loads(request.data)
     alias = post_data['alias']
