@@ -1,0 +1,20 @@
+RemixMail would be an cloud-hosted online service to easily generate email
+aliases that forward to one's real email address. Generate a unique alias for
+each web registration to protect against spam.
+
+Unsubscribing from spam is not a valid strategy as it confirms the email
+address as valid and allows the address to be resold to spammers as such. Remix
+Mail instead allows one to delete aliases receiving unsolicited email, cutting
+off spam at the source and protecting the user's real email address.
+
+RemixMail's website would allow one-step creation of a limited number of
+aliases for free. Registered, paying users would have access to a browser
+plugin to generate aliases with one click in an email input field, eliminating
+the need to open a new tab or window.
+
+Since initial creation of aliases can be done in one step by simply entering an
+email address on the website, the barrier of entry for new users is very low --
+there is no need for passwords or personal information from visitors. Since the
+user's email address is a necessary part of the exchange, we could then focus
+on converting these users to paid plans with extra features and unlimited
+aliases.
