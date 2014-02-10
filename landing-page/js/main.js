@@ -6,7 +6,20 @@ $(document).ready(function(){
     content  : 'Please enter a full, valid email address to anonymize.',
   });
 
+  $("#inputAlias").popover({
+    placement: 'bottom',
+    trigger  : 'manual',
+    title    : 'Invalid Alias',
+    content  : 'Enter a valid alphanumeric alias, with or without "@openkasm.com"',
+  });
+
   $("#inputEmail").click(function(){
+    $(this).popover('hide');
+  }).focus(function(){
+    $(this).popover('hide');
+  });
+
+  $("#inputAlias").click(function(){
     $(this).popover('hide');
   }).focus(function(){
     $(this).popover('hide');
@@ -37,7 +50,6 @@ $(document).ready(function(){
       $("#inputEmail").popover('show').blur();
     } else {
       console.log('Valid email');
-      //$form.prop('disabled', true);
       disableForm('.intro-form', true);
       $.ajax({
         type: "POST",
@@ -50,8 +62,38 @@ $(document).ready(function(){
       }).fail(function(){
         alert("There was a problem with your request. Please try again.");
       }).always(function(){
-        //$form.prop('disabled', false);
         disableForm('.intro-form', false);
+      });
+    }
+  });
+
+  $("#btnBanish").click(function(e){
+    e.preventDefault();
+    var alias = (/[a-zA-Z0-9]+/.exec($("#inputAlias").val()) || [])[0];
+    if (!alias) {
+      console.log('Invalid alias');
+      $("#inputAlias").popover('show').blur();
+    } else {
+      console.log('Valid alias');
+      disableForm('.banish-form', true);
+      $.ajax({
+        type: "POST",
+        url : "http://openkasm.com:5000/alias/deactivate",
+        data: { alias: alias },
+        dataType: "json",
+      }).done(function(data){
+        var modalText;
+        if (data.response == 'success') {
+          text = 'Successfully deactivated alias "' + alias + '".';
+        } else {
+          text = "Unable to deactivate alias. Did you type it correctly?"
+        }
+        $("#modalBanish .modal-body").html('<p class="lead">' + text + '</p>');
+        $("#modalBanish").modal();
+      }).fail(function(){
+        alert("There was a problem with your request. Please try again.");
+      }).always(function(){
+        disableForm('.banish-form', false);
       });
     }
   });

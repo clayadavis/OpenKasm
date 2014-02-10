@@ -22,8 +22,6 @@ def hello_world():
 def create_alias():
     def id_generator(size, chars=string.ascii_lowercase + string.digits):
         return ''.join(random.choice(chars) for _ in xrange(size))
-    #post_data = json.loads(request.data)
-    #email = post_data['email']
     email = request.form['email']
     inserted = False
     while not inserted:
@@ -45,12 +43,14 @@ def create_alias():
 
 
 @app.route('/alias/deactivate', methods=['POST'])
-@crossdomain(origin=['localhost', 'localhost:8000'])
+@crossdomain(origin='http://openkasm.com:8000')
 def deactivate_alias():
-    post_data = json.loads(request.data)
-    alias = post_data['alias']
+    alias = request.form['alias']
+    print 'Received request to deactivate alias "%s".' % alias
     result = mongo.db.redirects.update({'alias': alias},
                                        {'$set': {'deactivated': True}})
+    print 'Result:'
+    print json.dumps(result, sort_keys=True, indent=3)
     to_return = {'alias': alias}
     to_return['response'] = 'success' if result['n'] > 0 else 'fail'
     return jsonify(to_return)
