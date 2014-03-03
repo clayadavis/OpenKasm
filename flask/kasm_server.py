@@ -18,7 +18,6 @@ def hello_world():
 
 
 @app.route('/alias/create', methods=['POST'])
-@crossdomain(origin='http://openkasm.com:8000')
 def create_alias():
     def id_generator(size, chars=string.ascii_lowercase + string.digits):
         return ''.join(random.choice(chars) for _ in xrange(size))
@@ -43,7 +42,6 @@ def create_alias():
 
 
 @app.route('/alias/deactivate', methods=['POST'])
-@crossdomain(origin='http://openkasm.com:8000')
 def deactivate_alias():
     alias = request.form['alias']
     print 'Received request to deactivate alias "%s".' % alias
