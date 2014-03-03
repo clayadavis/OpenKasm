@@ -2,7 +2,10 @@
 import logging
 import pymongo
 
-hostnames = ['kasm.clayadavis.net', 'openkasm.com', 'remixmail.com']
+hostnames = ['kasm.clayadavis.net',
+             'openkasm.com',
+             #'remixmail.com',
+             ]
 # You may add additional parameters such as `username' and `password' if your
 # relay server requires authentication, `starttls' (boolean) or `ssl' (boolean)
 # for secure connections.
