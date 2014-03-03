@@ -1,5 +1,7 @@
 # Fill in the gid and uid as needed
-lamson start -gid 999 -uid 999
+# $ id -u openkasm -> 998
+# $ id -g openkasm -> 998
+lamson start -gid 998 -uid 998
 
 # Here, run is the location of the pid files
 lamson stop -ALL run/
