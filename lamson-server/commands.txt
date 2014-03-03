@@ -1,0 +1,5 @@
+# Fill in the gid and uid as needed
+lamson start -gid 999 -uid 999
+
+# Here, run is the location of the pid files
+lamson stop -ALL run/
