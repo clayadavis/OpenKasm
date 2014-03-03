@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.config['MONGO_DBNAME'] = 'kasm'
 mongo = PyMongo(app)
 
-@app.route('/')
+@app.route('/alias/test')
 def hello_world():
     return "API is a go"
 
